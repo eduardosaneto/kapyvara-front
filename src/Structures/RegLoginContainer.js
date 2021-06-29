@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const RegLoginCont = styled.div`
+const RegLoginContainer = styled.div`
   background-color: #316a37;
   width: 100vw;
   height: 100vh;
@@ -58,4 +58,4 @@ const RegLoginCont = styled.div`
   }
 `;
 
-export { RegLoginCont };
+export { RegLoginContainer };

@@ -1,4 +1,4 @@
-import { RegLoginCont } from "../Structures/RegLoginCont";
+import { RegLoginContainer } from "../Structures/RegLoginContainer";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -22,7 +22,7 @@ export default function SignUp() {
   }
   return (
     <>
-      <RegLoginCont>
+      <RegLoginContainer>
         <img src={Logo} alt="Logo" />
         <p className="title">Kapyvara</p>
         <form onSubmit={(e) => Subscribe(e)}>
@@ -74,7 +74,7 @@ export default function SignUp() {
         <Link to="/">
           <p className="register">Já tem uma conta? Entre agora!</p>
         </Link>
-      </RegLoginCont>
+      </RegLoginContainer>
     </>
   );
 }
