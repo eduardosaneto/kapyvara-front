@@ -35,7 +35,7 @@ const List = styled.ul`
         width: calc(50% - 5px);
         height: 210px;
         margin-bottom: 8px; 
-        border: 1px solid #4C7E47;       
+        border: 1px solid #316a37;       
         border-radius: 5px;
     }
     div:first-child {
@@ -44,7 +44,7 @@ const List = styled.ul`
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 0.5px solid #4C7E47;
+        border-bottom: 0.5px solid rgba(76, 126, 71, 0.3);
     }
     img {
         width: 100%;
