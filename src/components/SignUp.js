@@ -29,7 +29,6 @@ export default function SignUp() {
     request.catch((err) => {
       //alert("Dados inseridos incorretamente, tente novamente.");
       setDisabled(false);
-      console.log(err);
     });
   }
   return (
