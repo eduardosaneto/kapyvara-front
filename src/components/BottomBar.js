@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext} from "react";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
 
+import QuantityContext from '../Contexts/QuantityContext';
+
 export default function BottomBar(){
 
     let history = useHistory();
+    const { quantity } = useContext(QuantityContext);
 
     return (
         <>
@@ -14,7 +17,7 @@ export default function BottomBar(){
                     <Cart onClick={() => history.push(`/checkout`)}/>
                 </CartBox>
                 <QuantityDisplay>
-                    <p>1</p>
+                    <p>{quantity}</p>
                 </QuantityDisplay>
             </Footer>
         </>
