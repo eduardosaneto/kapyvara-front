@@ -6,15 +6,35 @@ import axios from "axios";
 import Loader from "react-loader-spinner";
 import Logo from "../images/Logo.png";
 
-export default function SignIn() {
+export default function SignIn({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
 
   const history = useHistory();
 
+  if (localStorage.getItem("userSaved")) {
+    history.push("/home");
+  }
+
   function Connect(e) {
     e.preventDefault();
+    const body = { email, password };
+    setDisabled(true);
+    const request = axios.post("http://localhost:4000/sign-in", body);
+    request.then((res) => {
+      alert("Login feito com sucesso! Bem-vindo!");
+      setUser(res.data);
+      const userStorage = JSON.stringify(res.data);
+      localStorage.setItem("userSaved", userStorage);
+      setTimeout(() => {
+        history.push("/home");
+      }, 2000);
+    });
+    request.catch((err) => {
+      alert("Dados inseridos incorretamente, tente novamente.");
+      setDisabled(false);
+    });
   }
 
   return (
