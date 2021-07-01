@@ -1,31 +1,63 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Products from "./Products";
+
 import carteira from "../images/carteira.JPG";
+import loading from '../images/loading.svg'
 
 export default function Home(){
+    
+    const [catalog, setCatalog] = useState([]);
+    const [kapypromo, setKapypromo] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    // const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    useEffect(() => {
+        setCatalog([])
+        setIsLoading(true)
+        // const request = axios.get('https://localhost:4000/home', config);
+        const request = axios.get('http://localhost:4000/home');
+        request.then( response => {
+            setCatalog(response.data);
+            const forSale = response.data.filter(c => c.forsale === "Sim");
+            setKapypromo(forSale);
+            setIsLoading(false)
+        });
+        request.catch(() => {
+            setIsError(true);
+            setIsLoading(false);
+        });
+    }, []);
 
     return (
         <Container>
             <Navbar/>
+            { isLoading ? <Load><div><img src={loading} alt="Loading"/>Loading...</div></Load>  : ""}
+            { isError ? <Load>Houve uma falha ao obter o catálogo de produtos, <br/> por favor atualize a página</Load> : ""}
             <SaleBox>
                 <SaleProduct>
-                    <div>
-                        <img src={carteira} alt="carteira"/>
-                    </div>
-                    <SaleProductInfo >
-                        <span>
-                            <h1>Kapyvara Leather Slim</h1>
-                        </span>
-                        <h2>R$200,00</h2>
-                    </SaleProductInfo >
+                    {kapypromo.map(k => (
+                    <>
+                        <div>
+                            <img src={k.image} alt={k.name}/>
+                        </div>
+                        <SaleProductInfo >
+                            <span>
+                                <h1>{k.name}</h1>
+                            </span>
+                            <h2>R${k.price},00</h2>
+                        </SaleProductInfo >
+                    </>
+                    ))}
                 </SaleProduct>
                 <SaleText>
                     <h1>Kapypromo do dia</h1>
                 </SaleText>
             </SaleBox>
-            <Products />
+            <Products catalog={catalog}/>
         </Container>
     );
 }
@@ -114,6 +146,37 @@ const SaleText = styled.div`
         color: #fff;
         text-align: center;
         margin-bottom: 3px;
+    }
+`;
+
+const Load = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #6d6d6d;
+  font-size: 36px;
+  padding-top: 35px;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #6D6D6D;
+        font-size: 30px;
+        padding-top: 30px;
+    }
+    img{
+        height: 100px;
+        width: 100px;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 `;
 

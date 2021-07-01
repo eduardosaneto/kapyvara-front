@@ -2,20 +2,22 @@ import styled from "styled-components";
 import axios from "axios";
 import carteira from "../images/carteira.JPG";
 
-export default function Products(){
+export default function Products({ catalog }){
     return (
         <List>
-            <li>
-                <div>
-                    <img src={carteira} alt="carteira"/>
-                </div>
-                <ProductInfos>
-                    <span>
-                        <h1>Kapyvara Leather Slim</h1>
-                    </span>
-                    <h2>R$200,00</h2>
-                </ProductInfos>                
-            </li>
+            {catalog.map(c => (
+                <li>
+                    <div>
+                        <img src={c.image} alt={c.name}/>
+                    </div>
+                    <ProductInfos>
+                        <span>
+                            <h1>{c.name}</h1>
+                        </span>
+                        <h2>R${c.price},00</h2>
+                    </ProductInfos>                
+                </li>
+            ))}
         </List>
     );
 }
