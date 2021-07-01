@@ -13,9 +13,9 @@ export default function SignIn({ setUser }) {
 
   const history = useHistory();
 
-  if (localStorage.getItem("userSaved")) {
-    history.push("/home");
-  }
+  //if (localStorage.getItem("userSaved")) {
+  //  history.push("/home");
+  //}
 
   function Connect(e) {
     e.preventDefault();
