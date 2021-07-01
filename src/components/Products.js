@@ -16,10 +16,6 @@ export default function Products(){
                     <h2>R$200,00</h2>
                 </ProductInfos>                
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
         </List>
     );
 }

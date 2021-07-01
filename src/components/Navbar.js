@@ -1,21 +1,51 @@
-import styled from "styled-components";
+import { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+import { DebounceInput } from "react-debounce-input";
+import { IoIosSearch } from "react-icons/io";
+import { BiMap } from 'react-icons/bi'
+
 import Logo from "../images/Logo.png";
 
 export default function Navbar(){
+
+    const [search, setSearch] = useState("");
+
+    function searchProduct(e) {    
+        setSearch(e.target.value);
+        if(search.lenght <= 2) {
+            setSearch('');
+            return
+        };
+    };
+
+
     return (
         <>
             <Header>
                 <Img></Img>
-                <input type="text" placeholder="Pesquise na Kapyvara.com"/>
+                <Form>
+                    <DebounceInput 
+                        type="text" placeholder="Pesquise na Kapyvara.com" 
+                        value={search} onChange={searchProduct}
+                        className="search-box" debounceTimeout={300}
+                    />
+                    <button type="submit">
+                        <IoIosSearch className="search"/>  
+                    </button>
+                </Form>
             </Header>
+            <Position>
+                <MapIcon />
+                <p>Localização desativada</p>
+            </Position>
         </>
     );
 }
 
 const Header = styled.header`
     width: 100%;
-    height: 100px;
+    height: 110px;
     padding: 10px 10px;
     display: flex;
     flex-direction: column;
@@ -26,8 +56,12 @@ const Header = styled.header`
     top: 0;
     left: 0;
     z-index: 10;
+`;
 
-    input {
+const Form = styled.form`
+    width: 100%;
+    position: relative;
+    .search-box {
         width: 100%;
         height: 40px;
         border-radius: 5px;
@@ -45,6 +79,21 @@ const Header = styled.header`
             outline: 0;
         }
     }
+    button {
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        padding: 8px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: #fff;
+    }
+    .search {
+        font-size: 26px;
+        color: #316a37;
+        cursor: pointer;
+    }
 `;
 
 const Img = styled.div`
@@ -54,3 +103,29 @@ const Img = styled.div`
     background-size: cover;
     background-position: center;
 `;
+
+const Position = styled.span`
+    width: 100%;
+    height: 30px;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #4C7E47; 
+    position: fixed;
+    top: 110px;
+    left: 0;
+    z-index: 10;
+    p {
+        font-size: 12px;
+        margin-top: 2px;
+        margin-left: 5px;
+        color: #fff;
+
+    }
+`;
+
+const MapIcon = styled(BiMap)`
+    font-size: 15px;
+    color: #fff;
+`

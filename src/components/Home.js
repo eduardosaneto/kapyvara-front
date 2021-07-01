@@ -5,6 +5,7 @@ import Products from "./Products";
 import carteira from "../images/carteira.JPG";
 
 export default function Home(){
+
     return (
         <Container>
             <Navbar/>
@@ -34,7 +35,7 @@ const Container = styled.section`
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    padding: 115px 10px 70px 10px;
+    padding: 155px 10px 70px 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -80,7 +81,7 @@ const SaleProductInfo = styled.div`
     padding: 25px 5px;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     span {
         height: 50px;
         width: 100%;
@@ -103,7 +104,7 @@ const SaleText = styled.div`
     width: 100%;
     height: 40px;
     display: flex;
-flex-direction: column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #316a37;
