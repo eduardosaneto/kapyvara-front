@@ -14,7 +14,7 @@ export default function BottomBar(){
         <>
             <Footer>
                 <CartBox>
-                    <Cart onClick={() => history.push(`/checkout`)}/>
+                    <Cart onClick={() => history.push(`/cart`)}/>
                 </CartBox>
                 <QuantityDisplay>
                     <p>{quantity}</p>
