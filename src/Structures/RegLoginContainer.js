@@ -29,6 +29,8 @@ const RegLoginContainer = styled.div`
     font-size: 20px;
     ::placeholder {
       font-size: 20px;
+      padding: 10px;
+      color: #C6C6C6;
     }
   }
   button {
