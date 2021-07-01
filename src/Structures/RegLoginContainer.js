@@ -3,7 +3,7 @@ import styled from "styled-components";
 const RegLoginContainer = styled.div`
   background-color: #316a37;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -25,6 +25,7 @@ const RegLoginContainer = styled.div`
     border-radius: 5px;
     border: none;
     outline: none;
+    padding: 20px;
     font-size: 20px;
     ::placeholder {
       font-size: 20px;
