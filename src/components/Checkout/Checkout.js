@@ -30,6 +30,21 @@ export default function CheckOut({ user }) {
     history.push("/home");
   }
 
+  function finishOrder() {
+    let description = "";
+    cart.forEach((item, i) => {
+      description += `Item ${i + 1} - Nome: ${item.name} / Preço: ${
+        item.price
+      } / Qntd: ${item.quantity} / Total: ${item.price * item.quantity} \n`;
+    });
+    const body = {
+      userId: user.user.id,
+      total: total,
+      description: description,
+    };
+    console.log(user.user.id);
+  }
+
   return (
     <>
       <Navbar />
@@ -41,8 +56,10 @@ export default function CheckOut({ user }) {
           </p>
         </Welcome>
         <ItemCards />
-        <OrderData user={user} />
-        <FinishOrder>Finalizar compra</FinishOrder>
+        <OrderData user={user} total={total} />
+        <FinishOrder onClick={() => finishOrder()}>
+          Finalizar compra
+        </FinishOrder>
         <CancelOrder onClick={() => cancelOrder()}>Cancelar compra</CancelOrder>
       </Container>
       <BottomBar />
@@ -78,7 +95,7 @@ const Welcome = styled.div`
 const FinishOrder = styled.button`
   width: 200px;
   height: 60px;
-  margin-top: 20px;
+  margin-top: 15px;
   background-color: #316a37;
   border: 1px solid #316a37;
   border-radius: 5px;

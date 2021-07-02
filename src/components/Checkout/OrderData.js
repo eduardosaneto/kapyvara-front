@@ -4,7 +4,7 @@ import DeliveryContext from "../../Contexts/DeliveryContext";
 import { useHistory } from "react-router";
 import Loader from "react-loader-spinner";
 
-export default function OrderData({ user }) {
+export default function OrderData({ user, total }) {
   const { delivery } = useContext(DeliveryContext);
   console.log(user);
 
@@ -14,6 +14,7 @@ export default function OrderData({ user }) {
         <li>Nome: {user.user.userName}</li>
         <li>CPF: {user.user.cpf}</li>
         <li>Telefone p/ contato: {user.user.phone}</li>
+        <li>Total da compra: R$ {total},00</li>
         <li>Tipo de entrega: {delivery}</li>
       </DataList>
     </>
