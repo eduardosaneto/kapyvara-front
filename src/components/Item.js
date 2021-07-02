@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 
-export default function Item({ catalog, order, setOrder, image, name, price}){
+export default function Item({ order, setOrder, image, name, price}){
 
     const [isSelected, setIsSelected] = useState(false);
     const [count, setCount] = useState(1);
@@ -14,34 +14,30 @@ export default function Item({ catalog, order, setOrder, image, name, price}){
     }
 
     function chosenOption() {
-        if(!isSelected && (count - 1) === 0){
+        if (!isSelected && (count - 1) === 0) {
             setIsSelected(true);
             addToOrder();
-        } else if(isSelected && (count - 1) === 0){
+        } else if (isSelected && (count - 1) === 0) {
             removefromOrder();
         }    
-      }
+    };
 
     function optionQuantity(e, operator) {
-
         let control = false;
-
         e.stopPropagation();
 
-        if(operator === "-") {
+        if (operator === "-") {
             count <= 1 ? unselectItem() : setCount(count - 1);
         } else {
             setCount(count + 1);
             control = true;
         }
-
         updatedOrder(control);
-    }
+    };
 
     function updatedOrder(control){
-
         const updatedChosenOption = order.map((item) => {
-            if(item.name === name){
+            if (item.name === name) {
                 return {
                     name: name,
                     price: price,
@@ -51,9 +47,8 @@ export default function Item({ catalog, order, setOrder, image, name, price}){
                 return item;
             } 
         });
-
         setOrder(updatedChosenOption);  
-    }
+    };
 
     function addToOrder(){
         const selectedOption = {
@@ -61,15 +56,14 @@ export default function Item({ catalog, order, setOrder, image, name, price}){
             price: price,
             quantity: count
         };
-
         const updatedOrder = [...order, selectedOption];
         setOrder(updatedOrder);       
-    }
+    };
 
     function removefromOrder() {
         const updatedOrder = order.filter((item) => item.name !== name);
         setOrder(updatedOrder);
-    }
+    };
 
     return (
             <Li>
