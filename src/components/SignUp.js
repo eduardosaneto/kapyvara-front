@@ -21,7 +21,7 @@ export default function SignUp() {
     e.preventDefault();
     const body = { email, name, cpf, phone, password, confirmPass };
     setDisabled(true);
-    const request = axios.post("http://localhost:4000/sign-up", body);
+    const request = axios.post("https://back-end-kapyvara.herokuapp.com/sign-up", body);
     request.then(() => {
       alert("Cadastro feito com sucesso! Bem-vindo!");
       history.push("/");

@@ -21,7 +21,7 @@ export default function SignIn({ setUser }) {
     e.preventDefault();
     const body = { email, password };
     setDisabled(true);
-    const request = axios.post("http://localhost:4000/sign-in", body);
+    const request = axios.post("https://back-end-kapyvara.herokuapp.com/sign-in", body);
     request.then((res) => {
       alert("Login feito com sucesso! Bem-vindo!");
       setUser(res.data);

@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     setCatalog([]);
     setIsLoading(true);
-    const request = axios.get('https://localhost:4000/home', config);
+    const request = axios.get('https://back-end-kapyvara.herokuapp.com/home', config);
     request.then((response) => {
       setCatalog(response.data);
       const forSale = response.data.filter((c) => c.forsale === "Sim");

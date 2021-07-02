@@ -48,10 +48,10 @@ export default function CheckOut({ user }) {
       total: total,
       description: description,
     };
-    const request = axios.post("http://localhost:4000/sales", body, config);
+    const request = axios.post("https://back-end-kapyvara.herokuapp.com/sales", body, config);
     request.then((res) => {
       setDisabled(false);
-      alert("Compra finalziada com sucesso!");
+      alert("Compra finalizada com sucesso!");
       history.push("/home");
     });
     request.catch(() => {

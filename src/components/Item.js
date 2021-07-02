@@ -12,7 +12,6 @@ export default function Item({ image, name, price }){
     const { cart, setCart } = useContext(CartContext); 
 
     console.log(cart);
-    // console.log(count);
 
     function unselectItem() {
         setIsSelected(false);
@@ -33,7 +32,6 @@ export default function Item({ image, name, price }){
         e.stopPropagation();
 
         if (operator === "-") {
-            chosenOption();
             count <= 1 ? unselectItem() : setCount(count - 1);
         } else {
             setCount(count + 1);
@@ -86,10 +84,10 @@ export default function Item({ image, name, price }){
                         </span>
                         <h2>R${price},00</h2>
                     </div>
-                    <AddBox selected={isSelected}>
+                    <AddBox selected={isSelected} onClick={chosenOption}>
                         {!isSelected ? 
                         <>
-                            <div><Plus onClick={chosenOption} /></div>
+                            <div><Plus /></div>
                             <h3>Add to Wallet</h3>
                         </>
                         :
