@@ -129,7 +129,7 @@ const SaleProductInfo = styled.div`
     }
     h2 {
         font-size: 26px;
-        font-style: bold;
+        font-weight: bold;
     }
 `;
 
