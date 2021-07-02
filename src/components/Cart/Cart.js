@@ -24,6 +24,7 @@ export default function Cart({ user }) {
         <ItemCards />
         <DeliveryType />
         <ConfirmItens>Confirmar pedido</ConfirmItens>
+        <ClearCart>Limpar carrinho</ClearCart>
       </Container>
       <BottomBar />
     </>
@@ -67,4 +68,16 @@ const ConfirmItens = styled.button`
   color: #fff;
   font-weight: bold;
   font-size: 18px;
+`;
+
+const ClearCart = styled.button`
+  width: 120px;
+  height: 30px;
+  margin-top: 10px;
+  background-color: #fff;
+  border: 1px solid #316a37;
+  border-radius: 5px;
+  color: #316a37;
+  font-weight: bold;
+  font-size: 12px;
 `;
