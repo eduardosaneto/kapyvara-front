@@ -1,5 +1,6 @@
 import Navbar from "../Navbar";
 import BottomBar from "../BottomBar";
+import OrderData from "./OrderData";
 import ItemCards from "../Cart/ItemCards";
 import Loader from "react-loader-spinner";
 import { useHistory } from "react-router";
@@ -24,19 +25,25 @@ export default function CheckOut({ user }) {
     setTotal(totalSpent);
   }, []);
 
+  function cancelOrder() {
+    setCart([]);
+    history.push("/home");
+  }
+
   return (
     <>
       <Navbar />
       <Container>
         <Welcome>
-          <p className="title">Olá, {total}</p>
+          <p className="title">Olá, {name}</p>
           <p className="subtitle">
             Clique em 'Finalizar pedido' para efetuar sua compra!
           </p>
         </Welcome>
         <ItemCards />
-        <ConfirmItens>Finalizar compra</ConfirmItens>
-        <ClearCart>Cancelar compra</ClearCart>
+        <OrderData user={user} />
+        <FinishOrder>Finalizar compra</FinishOrder>
+        <CancelOrder onClick={() => cancelOrder()}>Cancelar compra</CancelOrder>
       </Container>
       <BottomBar />
     </>
@@ -68,7 +75,7 @@ const Welcome = styled.div`
   }
 `;
 
-const ConfirmItens = styled.button`
+const FinishOrder = styled.button`
   width: 200px;
   height: 60px;
   margin-top: 20px;
@@ -80,7 +87,7 @@ const ConfirmItens = styled.button`
   font-size: 18px;
 `;
 
-const ClearCart = styled.button`
+const CancelOrder = styled.button`
   width: 120px;
   height: 30px;
   margin-top: 10px;
