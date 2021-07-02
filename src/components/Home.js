@@ -130,22 +130,22 @@ const SaleProductInfo = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  span {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  h1 {
-    font-size: 16px;
-    line-height: 19px;
-  }
-  h2 {
-    font-size: 26px;
-    font-style: bold;
-  }
+    span {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    h1 {
+        font-size: 16px;
+        line-height: 19px;
+    }
+    h2 {
+        font-size: 26px;
+        font-weight: bold;
+    }
 `;
 
 const SaleText = styled.div`
