@@ -1,22 +1,20 @@
+// import { useState } from 'react';
 import styled from "styled-components";
 import axios from "axios";
-import carteira from "../images/carteira.JPG";
+// import { FaPlus } from "react-icons/fa";
+import Item from './Item';
 
 export default function Products({ catalog }){
+
     return (
         <List>
             {catalog.map(c => (
-                <li>
-                    <div>
-                        <img src={c.image} alt={c.name}/>
-                    </div>
-                    <ProductInfos>
-                        <span>
-                            <h1>{c.name}</h1>
-                        </span>
-                        <h2>R${c.price},00</h2>
-                    </ProductInfos>                
-                </li>
+                <Item 
+                    key={c.id}
+                    name={c.name}
+                    image={c.image}
+                    price={c.price}
+                />
             ))}
         </List>
     );
@@ -29,53 +27,5 @@ const List = styled.ul`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    li {
-        width: calc(50% - 5px);
-        height: 210px;
-        margin-bottom: 8px; 
-        border: 1px solid #316a37;       
-        border-radius: 5px;
-    }
-    div:first-child {
-        height: 140px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 0.5px solid rgba(76, 126, 71, 0.3);
-    }
-    img {
-        width: 100%;
-        max-width: 162px;
-        max-height: 118px;
-        object-fit: cover;
-    }
 `;
 
-const ProductInfos = styled.div`
-    width: 100%;
-    height: 70px;
-    display: flex;
-    padding: 2px 5px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    span {
-        height: 30px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 5px;
-    }
-    h1 {
-        font-size: 14px;
-        text-align: center;
-        line-height: 15px;
-    }
-    h2 {
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-    }
-`;
