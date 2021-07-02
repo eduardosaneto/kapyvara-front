@@ -6,7 +6,6 @@ import Loader from "react-loader-spinner";
 
 export default function OrderData({ user, total }) {
   const { delivery } = useContext(DeliveryContext);
-  console.log(user);
 
   return (
     <>

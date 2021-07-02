@@ -5,6 +5,7 @@ import ItemCards from "../Cart/ItemCards";
 import Loader from "react-loader-spinner";
 import { useHistory } from "react-router";
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import CartContext from "../../Contexts/CartContext";
 import styled from "styled-components";
 import DeliveryContext from "../../Contexts/DeliveryContext";
@@ -13,6 +14,8 @@ export default function CheckOut({ user }) {
   const { cart, setCart } = useContext(CartContext);
   const { delivery, setDelivery } = useContext(DeliveryContext);
   const [total, setTotal] = useState(0);
+  const [disabled, setDisabled] = useState(false);
+
   const history = useHistory();
 
   const name = user.user.userName;
@@ -31,18 +34,32 @@ export default function CheckOut({ user }) {
   }
 
   function finishOrder() {
+    setDisabled(true);
+    const token = user.token;
     let description = "";
     cart.forEach((item, i) => {
       description += `Item ${i + 1} - Nome: ${item.name} / Preço: ${
         item.price
       } / Qntd: ${item.quantity} / Total: ${item.price * item.quantity} \n`;
     });
+    const config = { headers: { Authorization: `Bearer ${token}` } };
     const body = {
       userId: user.user.id,
       total: total,
       description: description,
     };
-    console.log(user.user.id);
+    const request = axios.post("http://localhost:4000/sales", body, config);
+    request.then((res) => {
+      setDisabled(false);
+      alert("Compra finalziada com sucesso!");
+      history.push("/home");
+    });
+    request.catch(() => {
+      setDisabled(false);
+      alert("Um erro inesperado ocorreu");
+    });
+
+    console.log(token);
   }
 
   return (
@@ -57,8 +74,12 @@ export default function CheckOut({ user }) {
         </Welcome>
         <ItemCards />
         <OrderData user={user} total={total} />
-        <FinishOrder onClick={() => finishOrder()}>
-          Finalizar compra
+        <FinishOrder onClick={() => finishOrder()} disabled={disabled}>
+          {disabled ? (
+            <Loader type="ThreeDots" color="#FFF" height={40} width={45} />
+          ) : (
+            "Finalizar compra"
+          )}
         </FinishOrder>
         <CancelOrder onClick={() => cancelOrder()}>Cancelar compra</CancelOrder>
       </Container>
@@ -102,6 +123,7 @@ const FinishOrder = styled.button`
   color: #fff;
   font-weight: bold;
   font-size: 18px;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1.0)};
 `;
 
 const CancelOrder = styled.button`
