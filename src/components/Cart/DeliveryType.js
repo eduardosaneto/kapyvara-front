@@ -15,7 +15,7 @@ export default function DeliveryType() {
     } else {
       setMail(false);
       setStore(true);
-      setDelivery("Rerirada em loja");
+      setDelivery("Retirada em loja");
     }
   }
   function checkMail() {
