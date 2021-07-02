@@ -4,6 +4,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Home from "./Home";
 import Cart from "./Cart/Cart";
+import CheckOut from "./Checkout/Checkout";
 
 import QuantityContext from "../Contexts/QuantityContext";
 import CartContext from "../Contexts/CartContext";
@@ -34,6 +35,9 @@ export default function App() {
               </Route>
               <Route path="/cart" exact>
                 <Cart user={user} />
+              </Route>
+              <Route path="/checkout" exact>
+                <CheckOut user={user} />
               </Route>
             </Switch>
           </Router>
