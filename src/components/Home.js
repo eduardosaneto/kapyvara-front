@@ -8,17 +8,18 @@ import BottomBar from "./BottomBar";
 import loading from "../images/loading.svg";
 
 export default function Home() {
-  const [catalog, setCatalog] = useState([]);
-  const [kapypromo, setKapypromo] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  // const config = { headers: { Authorization: `Bearer ${token}` } };
+    const [catalog, setCatalog] = useState([]);
+    const [kapypromo, setKapypromo] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const localstorage = JSON.parse(localStorage.user);
+    const token = localstorage.token;
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     setCatalog([]);
     setIsLoading(true);
-    // const request = axios.get('https://localhost:4000/home', config);
-    const request = axios.get("http://localhost:4000/home");
+    const request = axios.get('https://localhost:4000/home', config);
     request.then((response) => {
       setCatalog(response.data);
       const forSale = response.data.filter((c) => c.forsale === "Sim");
