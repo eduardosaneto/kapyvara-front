@@ -75,7 +75,7 @@ const ProductInfos = styled.div`
     }
     h2 {
         font-size: 18px;
-        font-style: bold;
+        font-weight: bold;
         text-align: center;
     }
 `;
