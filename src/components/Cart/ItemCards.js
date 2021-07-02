@@ -48,6 +48,7 @@ const ProductDescription = styled.div`
   width: 75%;
   height: 100px;
   color: #fff;
+  margin-left: 15px;
   font-size: 16px;
   display: flex;
   flex-direction: column;

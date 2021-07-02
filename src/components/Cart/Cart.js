@@ -23,6 +23,7 @@ export default function Cart({ user }) {
         </Welcome>
         <ItemCards />
         <DeliveryType />
+        <ConfirmItens>Confirmar pedido</ConfirmItens>
       </Container>
       <BottomBar />
     </>
@@ -54,4 +55,16 @@ const Welcome = styled.div`
     font-size: 16px;
     margin-top: 10px;
   }
+`;
+
+const ConfirmItens = styled.button`
+  width: 200px;
+  height: 60px;
+  margin-top: 130px;
+  background-color: #316a37;
+  border: 1px solid #316a37;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
 `;

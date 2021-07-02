@@ -11,10 +11,12 @@ export default function DeliveryType() {
   function checkStore() {
     setMail(false);
     setStore(true);
+    setDelivery("Rerirada em loja");
   }
   function checkMail() {
     setMail(true);
     setStore(false);
+    setDelivery("Correios");
   }
 
   return (
