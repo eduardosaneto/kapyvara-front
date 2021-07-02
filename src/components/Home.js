@@ -3,8 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Products from "./Products";
+import BottomBar from "./BottomBar";
 
-import carteira from "../images/carteira.JPG";
 import loading from '../images/loading.svg'
 
 export default function Home(){
@@ -58,6 +58,7 @@ export default function Home(){
                 </SaleText>
             </SaleBox>
             <Products catalog={catalog}/>
+            <BottomBar />
         </Container>
     );
 }
