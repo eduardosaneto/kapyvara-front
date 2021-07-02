@@ -1,22 +1,29 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import CartContext from "../../Contexts/CartContext";
 
 export default function ItemCards() {
+  const { cart } = useContext(CartContext);
+
   return (
     <>
-      <ItemCard>
-        <ProductImage>
-          <img
-            src="https://kalibrado.com/wp-content/uploads/2017/04/EGNT-Black-Carbon-ID-Wallet.jpg"
-            alt="product_image"
-          />
-        </ProductImage>
-        <ProductDescription>
-          <div className="title">Kapyvara Leather Slim</div>
-          <div>Valor Unit: R$ 150,00</div>
-          <div>Qntd: 2</div>
-          <div className="total">Total: R$ 300,00</div>
-        </ProductDescription>
-      </ItemCard>
+      {cart.map((item) => {
+        return (
+          <ItemCard>
+            <ProductImage>
+              <img src={item.image} alt="product_image" />
+            </ProductImage>
+            <ProductDescription>
+              <div className="title">{item.name}</div>
+              <div>Valor Unit: R$ {item.price},00</div>
+              <div>Qntd: {item.quantity}</div>
+              <div className="total">
+                Total: R$ {item.quantity * item.price},00
+              </div>
+            </ProductDescription>
+          </ItemCard>
+        );
+      })}
     </>
   );
 }
@@ -48,6 +55,7 @@ const ProductDescription = styled.div`
   width: 75%;
   height: 100px;
   color: #fff;
+  margin-left: 15px;
   font-size: 16px;
   display: flex;
   flex-direction: column;

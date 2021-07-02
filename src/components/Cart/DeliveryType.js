@@ -9,12 +9,24 @@ export default function DeliveryType() {
   const { delivery, setDelivery } = useContext(DeliveryContext);
 
   function checkStore() {
-    setMail(false);
-    setStore(true);
+    if (store) {
+      setStore(false);
+      setDelivery("");
+    } else {
+      setMail(false);
+      setStore(true);
+      setDelivery("Rerirada em loja");
+    }
   }
   function checkMail() {
-    setMail(true);
-    setStore(false);
+    if (mail) {
+      setMail(false);
+      setDelivery("");
+    } else {
+      setMail(true);
+      setStore(false);
+      setDelivery("Correios");
+    }
   }
 
   return (

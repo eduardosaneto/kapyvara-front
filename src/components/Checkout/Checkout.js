@@ -1,59 +1,47 @@
 import Navbar from "../Navbar";
 import BottomBar from "../BottomBar";
-import ItemCards from "./ItemCards";
-import DeliveryType from "./DeliveryType";
+import ItemCards from "../Cart/ItemCards";
 import Loader from "react-loader-spinner";
 import { useHistory } from "react-router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "../../Contexts/CartContext";
 import styled from "styled-components";
 import DeliveryContext from "../../Contexts/DeliveryContext";
 
-export default function Cart({ user }) {
-  const { setCart } = useContext(CartContext);
+export default function CheckOut({ user }) {
+  const { cart, setCart } = useContext(CartContext);
   const { delivery, setDelivery } = useContext(DeliveryContext);
+  const [total, setTotal] = useState(0);
   const history = useHistory();
 
   const name = user.user.userName;
 
-  function confirmOrder() {
-    if (!delivery) {
-      alert(
-        "Você precisa escolher alguma forma de receber o produto: Escolha entre 'Retirada em loja' ou 'Correios''"
-      );
-    } else {
-      history.push("/checkout");
-    }
-  }
+  useEffect(() => {
+    let totalSpent = 0;
+    cart.forEach((item) => {
+      totalSpent += item.price;
+    });
+    setTotal(totalSpent);
+  }, []);
 
-  function clearCart() {
-    setCart([]);
-    setDelivery("");
-    history.push("/home");
-  }
   return (
     <>
       <Navbar />
       <Container>
         <Welcome>
-          <p className="title">Seu carrinho</p>
+          <p className="title">Olá, {total}</p>
           <p className="subtitle">
-            Olá {name}, por favor, verifique os itens de sua compra e insira seu
-            endereço.
+            Clique em 'Finalizar pedido' para efetuar sua compra!
           </p>
         </Welcome>
         <ItemCards />
-        <DeliveryType />
-        <ConfirmItens onClick={() => confirmOrder()}>
-          Confirmar pedido
-        </ConfirmItens>
-        <ClearCart onClick={() => clearCart()}>Limpar carrinho</ClearCart>
+        <ConfirmItens>Finalizar compra</ConfirmItens>
+        <ClearCart>Cancelar compra</ClearCart>
       </Container>
       <BottomBar />
     </>
   );
 }
-
 const Container = styled.section`
   max-width: 600px;
   width: 100%;
@@ -83,6 +71,7 @@ const Welcome = styled.div`
 const ConfirmItens = styled.button`
   width: 200px;
   height: 60px;
+  margin-top: 20px;
   background-color: #316a37;
   border: 1px solid #316a37;
   border-radius: 5px;
