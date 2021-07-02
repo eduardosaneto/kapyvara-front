@@ -2,6 +2,8 @@ import { useContext} from "react";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
+import { BiLogOut } from "react-icons/bi";
+import { AiOutlineHome } from "react-icons/ai";
 
 import QuantityContext from '../Contexts/QuantityContext';
 
@@ -10,15 +12,22 @@ export default function BottomBar(){
     let history = useHistory();
     const { quantity } = useContext(QuantityContext);
 
+    function deleteLocalStorage(){
+        localStorage.removeItem('user');
+        history.push(`/`);
+    }
+
     return (
         <>
             <Footer>
+                <Home onClick={() => history.push(`/home`)}/>
                 <CartBox>
                     <Cart onClick={() => history.push(`/cart`)}/>
                 </CartBox>
                 <QuantityDisplay>
                     <p>{quantity}</p>
                 </QuantityDisplay>
+                <Logout onClick={deleteLocalStorage}/>
             </Footer>
         </>
     );
@@ -77,4 +86,14 @@ const QuantityDisplay = styled.div`
 const Cart = styled(IoCartOutline)`
     font-size: 55px;
     color: #fff;
-`
+`;
+
+const Logout = styled(BiLogOut)`
+    font-size: 30px;
+    color: #fff;
+`;
+
+const Home = styled(AiOutlineHome)`
+    font-size: 30px;
+    color: #fff;
+`;
