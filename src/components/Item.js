@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from "styled-components";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 
-export default function Item({ order, setOrder, image, name, price}){
+import CartContext from '../Contexts/CartContext';
+
+export default function Item({ image, name, price }){
 
     const [isSelected, setIsSelected] = useState(false);
     const [count, setCount] = useState(1);
+    const { cart, setCart } = useContext(CartContext); 
+
+    console.log(cart);
+    // console.log(count);
 
     function unselectItem() {
         setIsSelected(false);
@@ -27,6 +33,7 @@ export default function Item({ order, setOrder, image, name, price}){
         e.stopPropagation();
 
         if (operator === "-") {
+            chosenOption();
             count <= 1 ? unselectItem() : setCount(count - 1);
         } else {
             setCount(count + 1);
@@ -36,9 +43,10 @@ export default function Item({ order, setOrder, image, name, price}){
     };
 
     function updatedOrder(control){
-        const updatedChosenOption = order.map((item) => {
+        const updatedChosenOption = cart.map(item => {
             if (item.name === name) {
                 return {
+                    image: image,
                     name: name,
                     price: price,
                     quantity: control ? count + 1 : count -1
@@ -47,22 +55,23 @@ export default function Item({ order, setOrder, image, name, price}){
                 return item;
             } 
         });
-        setOrder(updatedChosenOption);  
+        setCart(updatedChosenOption);  
     };
 
     function addToOrder(){
         const selectedOption = {
+            image: image,
             name: name,
             price: price,
             quantity: count
         };
-        const updatedOrder = [...order, selectedOption];
-        setOrder(updatedOrder);       
+        const updatedOrder = [...cart, selectedOption];
+        setCart(updatedOrder);       
     };
 
     function removefromOrder() {
-        const updatedOrder = order.filter((item) => item.name !== name);
-        setOrder(updatedOrder);
+        const newUpdatedOrder = cart.filter(item => item.name !== name);
+        setCart(newUpdatedOrder);
     };
 
     return (
